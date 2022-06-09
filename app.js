@@ -76,6 +76,7 @@ const game = () => {
     }
     let finalResultz = finalResults(playerOneScore, playerTwoScore)
     console.log(`${finalResultz} wins! Refresh the page to play again!`)
+    console.log(`final scores : You ${playerOneScore}, Computer : ${playerTwoScore}`)
 }
 //VALIDATIONS FOR THE GAME
 while(start === ""){
