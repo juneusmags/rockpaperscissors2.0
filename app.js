@@ -65,7 +65,7 @@ const game = () => {
         let computerSelection = computerPlay()
         let playerPrompt = prompt("Please enter your selection");
         while (playerPrompt.toUpperCase()!=="ROCK" && playerPrompt.toUpperCase()!=="PAPER" && playerPrompt.toUpperCase()!=="SCISSORS"){
-            playerPrompt = prompt("Please enter a proper option (ROCK, PAPER, SCISSORS)");
+            playerPrompt = prompt("Please enter a valid option (rOcK, PaPeR, sCiSsOrS)");
         }
         let playerSelection = playerPlay(playerPrompt.toUpperCase())
         const results = getGameResults(playerSelection, computerSelection)
