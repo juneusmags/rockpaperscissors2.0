@@ -1,0 +1,48 @@
+*{
+    margin : 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background-color: gray;
+    color : white;
+}
+
+#middle-selection-buttons{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.middle-box{
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+
+#game-results{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background-color: whitesmoke
+}
+
+#user-choice, #computer-choice{
+    display: none;
+}
+
+.results-box{
+    text-align : center;
+}
+
+
+
+

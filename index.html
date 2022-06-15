@@ -5,9 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rOcK pApEr ScIsSoRs bleh</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <nav class = "top">
+        <div class = "user">
+            <h3 id = "username">Type in a name to start a game!</h3>
+            <h4 id= "user-choice">Choosing...</h4>
+            <h4 id = "user-score"></h4>
+        </div>
+        <div id = "input-name">
+            <input id = "name" type = "text" value = "" placeholder="Enter a name"/>
+            <button id = "start-btn" type = "submit">Confirm Name</button>
+        </div>
+        <div class = "computer">
+            <h3>Computer</h3>
+            <h4 id = "computer-choice">Choosing...</h4>
+            <h4 id = "computer-score"></h4>
+        </div>
+    </nav>
+
+
+    <div id = "middle-selection-buttons">
+        <div class = "middle-box">
+            <button data-selection = "rock">Rock</button>
+            <button data-selection = "paper">Paper</button>
+            <button data-selection = "scissors">Scissors</button>
+        </div>
+    </div>
+
+    <div id = "game-results">
+        <div class = "results-box">
+            <h1>Game Results</h1>
+            <h2>You Win / Lose</h2>
+            <h3 id="round-results">blank beats blank</h3>
+        </div>
+    </div>
 
 
     <script src = "app.js"></script>

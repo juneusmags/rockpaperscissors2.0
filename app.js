@@ -1,10 +1,22 @@
-//NAME INPUT
-let start = prompt("Enter a name to start the game")
-//
+//ELEMENTS
+const userSelection = document.querySelectorAll("[data-selection")
+var startButton = document.getElementById("start-btn")
+var middleSection = document.getElementById("middle-selection-buttons")
+var gameResultsSection = document.getElementById("game-results")
+var chosenName = document.getElementById("username")
+var roundResults = document.getElementById("round-results")
+var userChoice = document.getElementById("user-choice")
+var computerChoice = document.getElementById("computer-choice")
+var inputName = document.getElementById("input-name")
+var userScoreHTML = document.getElementById("user-score")
+var computerScoreHTML = document.getElementById("computer-score")
+
+
+
 //SCORES
 let playerOneScore = 0
 let playerTwoScore = 0
-//
+
 //POSSIBILITIES
 const possibilities = [
     {
@@ -23,70 +35,97 @@ const possibilities = [
 //
 //COMPUTER SELECTION FUNCTION
 const computerPlay = () => {
-    let randomSelection = Math.floor(Math.random() * possibilities.length);
+    let randomSelection = Math.floor(Math.random() * possibilities.length)
+    computerChoice.innerHTML = `Computer chose : ${possibilities[randomSelection].selection}`
     return possibilities[randomSelection]
 }
 //YOUR SELECTION FUNCTION
 const playerPlay = (value) =>{
-    let selection = possibilities.find(selection => selection.selection === value)
+    let selection = possibilities.find(selection => selection.selection === value.toUpperCase())
+    userChoice.innerHTML = `You chose : ${selection.selection}`
     return selection
 }
 //GETS GAME RESULTS PER ROUND
 const getGameResults = (playerOne, playerTwo) => {
     if(playerOne.beats === playerTwo.selection){
         playerOneScore++
-        return `You win! ${playerOne.selection} beats ${playerTwo.selection}`
+        roundResults.innerHTML = `You win! ${playerOne.selection} beats ${playerTwo.selection}`
+        
     }
     else if(playerOne.selection === playerTwo.selection){
-        return 'It is a draw!'
+        roundResults.innerHTML = 'It is a draw!'
+        
     }
     else{
         playerTwoScore++
-        return `CPU wins ${playerTwo.selection} beats ${playerOne.selection}`
+        roundResults.innerHTML = `CPU wins ${playerTwo.selection} beats ${playerOne.selection}`
+        
     }
 }
 //GETS FINAL WINNER AFTER ALL ROUNDS PLAYED
-const finalResults = (playerOneScore, playerTwoScore) => {
-    if(playerOneScore > playerTwoScore){
+const finalResults = (one, two) => {
+    if(one > two){
         return "You"
     }
-    else if(playerOneScore < playerTwoScore){
+    else if(one < two){
         return "The computer"
     }
     else{
         return "No one"
     }
 } 
-//GAME FUNCTIONALITY
-const game = () => { 
-    console.log(`Hello ${start}, welcome to the game rock, paper scissors`)
-    for(let i = 0; i < 5; i++){
-        console.log("this is round", i+1);
-        let computerSelection = computerPlay()
-        let playerPrompt = prompt("Please enter your selection");
-        while (playerPrompt.toUpperCase()!=="ROCK" && playerPrompt.toUpperCase()!=="PAPER" && playerPrompt.toUpperCase()!=="SCISSORS"){
-            playerPrompt = prompt("Please enter a valid option (rOcK, PaPeR, sCiSsOrS)");
-        }
-        let playerSelection = playerPlay(playerPrompt.toUpperCase())
-        const results = getGameResults(playerSelection, computerSelection)
-        console.log(results)
-        console.log(`Your Score : ${playerOneScore} ----------- Computer Score : ${playerTwoScore}`)
-        console.log("##################")
-        
+
+//FUNCTION THAT SETS INPUT NAME
+const setName = () => {
+    var inputUserName = document.getElementById("name").value
+    if(inputUserName === ""){
+        chosenName.innerHTML = "Welcome No Name!"
     }
-    let finalResultz = finalResults(playerOneScore, playerTwoScore)
-    console.log(`${finalResultz} wins! Refresh the page to play again!`)
-    console.log(`final scores : You ${playerOneScore}, Computer : ${playerTwoScore}`)
-}
-//VALIDATIONS FOR THE GAME
-while(start === ""){
-    start = prompt("enter a valid name!")
+    else{
+        chosenName.innerHTML = `Welcome ${inputUserName}!`
+    }
+    
+} 
+
+
+
+//GAME FUNCTIONALITY
+const startGame = () => {
+    setName()
+    middleSection.style.display = "flex"
+    userChoice.style.display = "flex"
+    computerChoice.style.display = "flex"
+    inputName.style.display = "none"
+    
 }
 
-if(start !== "" && start !== null){
-    game()
+//BUTTON THAT STARTS THE GAME
+startButton.addEventListener("click", () =>{
+    startGame()
+})
+
+//FUNCTION THAT UPDATES THE SCORE
+const updateScore = (userS, computer) => {
+    userScoreHTML.innerHTML = `Score : ${userS}`
+    computerScoreHTML.innerHTML = `Score : ${computer}`
 }
-else if(start === null){
-    console.log("you automatically lose refresh the page to play again")
-}
-//
+
+//BUTTON SELECTION FUNCTIONALITY
+userSelection.forEach((userSelection) => {
+    userSelection.addEventListener("click", (e) => {
+        if(playerOneScore === 5 || playerTwoScore === 5){
+            let mainWinner = finalResults(playerOneScore, playerTwoScore)
+            alert(`The game is over ${mainWinner} won! Click 'OK' to play again!`)
+            window.location.reload()
+            
+        }
+        else{
+            gameResultsSection.style.display = "flex"
+            const selectionName = userSelection.dataset.selection
+            let userChoice = playerPlay(selectionName)
+            let computerChoice = computerPlay()
+            getGameResults(userChoice, computerChoice)
+            updateScore(playerOneScore, playerTwoScore)
+        }
+    })
+})
