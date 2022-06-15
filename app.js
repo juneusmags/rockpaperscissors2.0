@@ -87,8 +87,6 @@ const setName = () => {
     
 } 
 
-
-
 //GAME FUNCTIONALITY
 const startGame = () => {
     setName()
